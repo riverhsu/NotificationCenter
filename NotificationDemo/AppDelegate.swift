@@ -18,6 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        //UNUserNotificationCenter 物件是通知中心
+        //UNUserNotificationCenter.current() 取得 UNUserNotificationCenter 物件
+        //requestAuthorization 方法, 是微求使用者同恴 App 發送通知
+        //   options: 設定我們希望使用者同意的通知樣式, Struct 的型別. 名稱: UNAuthorizationOptions
+        //   completionHandler: 在使用者同恴或拒絕我們執行時，傳入closure, 它的參數是
+        //      granted: Bool 型別. 告訴我們使用者是否同意
+        //      error: Error 型別. 若有錯誤, 可從 error 了解錯誤原因        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {granted, error in
+            if granted {
+                print ("使用者同意了，每天都能收到米花兒的幸福訊息")
+            } else {
+                print("使用者不同意")
+            }
+        })
+        
         return true
     }
 
