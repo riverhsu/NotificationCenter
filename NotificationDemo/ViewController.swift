@@ -20,6 +20,16 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         content.title = "體驗過了，才是你旳"
         content.subtitle = "米花兒"
         content.body = "不要追問為什麼，就笨拙地走入未知。感受眼前的怦然與顱抖，聽聽左邊的碎裂和跳動。不管好的壞的，只有體驗過了，才是你的。"
+        content.userInfo = ["link":"https://www.facebook.com/himinihana/photos/a.104501733005072.5463.100117360110176/981809495274287"]
+        
+        //============================================================================================
+        //如何設定 "顯示通知" 裹的按鈕功能
+        //設定通知內容的類別 ID
+        //和 UNNotificationCategory 物件的 identifier 一樣，在 App 收到通知時, 才知道要顯示 "好感動"和"沒感覺"的按鈕。
+        //  如果沒有設定 categoryIdentifier 或是設定了，但找不到對應的 UNNotificationCategory,則會顯示只有關閉按鈕的標準通知
+        content.categoryIdentifier = "luckyMessage"
+        //============================================================================================
+   
         
         //設定 App Icon 顯示的數字
         content.badge = 1
@@ -51,6 +61,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         // 4. UNPushNotificationTrigger: 從千里之外的後台，傳送到使用者手機的通知
         
         
+        //馬上傳送通知
         //建立 request 物件。有了它，才能和通知中心請求發送通知
         //  public convenience init(identifier: String, content: UNNotificationContent, trigger: UNNotificationTrigger?)
         //  建立 request 傳入 content & trigger, 通知中心才知道通知的內容和觸發的條件
@@ -70,6 +81,8 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         //系統將呼叫 completionHandler 參數，經由它的 Error 型別參數告訴我們通知請求是否被接受
         // 我們也可以在 withCompletionHandler 傳入 closure, 判斷請求是否成功; 因為我們不管結果, 所以使用 nil
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    
+        
     }
 
     override func viewDidLoad() {
